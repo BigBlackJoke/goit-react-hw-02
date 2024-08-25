@@ -1,5 +1,4 @@
-export default function Feedback({ good = 0, neutral = 0, bad = 0 }) {
-    let total = good + neutral + bad;
+export default function Feedback({ good, neutral, bad, total }) {
     return (
         <div>
             <p>Good: { good }</p>
