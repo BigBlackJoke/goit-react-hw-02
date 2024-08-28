@@ -7,11 +7,10 @@ import { useEffect, useState } from 'react';
 
 export default function App() {
 
-  const [values, setValues] = useState({
-	good: 0,
-	neutral: 0,
-	bad: 0
-}
+  const [values, setValues] = useState(() => {
+    const savedFeedbacks = window.localStorage.getItem('savedFeedbacks');
+    return savedFeedbacks !== null ? JSON.parse(savedFeedbacks) : { good: 0, neutral: 0, bad: 0 }
+  }
   );
   
   const updateFeedback = feedbackType => {
@@ -23,6 +22,8 @@ export default function App() {
   }
 
   let totalFeedback = values.good + values.neutral + values.bad;
+
+  useEffect(() => { window.localStorage.setItem('savedFeedbacks', JSON.stringify(values)); }, [values])
 
 
   return (
